@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.05 build -831301201 
-                                                                                               Fri Feb 21 21:12:49 2020
+                                                                                               Sat Feb 22 12:58:58 2020
 
 Microchip MPLAB XC8 C Compiler v2.05 (Free license) build 20181220022703 Og1 
      1                           	processor	18F46K22
@@ -555,13 +555,13 @@ Microchip MPLAB XC8 C Compiler v2.05 (Free license) build 20181220022703 Og1
    536  001794  F000               	nop	
    537  001796                     l2463:
    538                           
-   539                           ;main.c: 65: {;main.c: 67: _delay((unsigned long)((1000)*(64000000/4000.0)));
-   540  001796  0E52               	movlw	82
+   539                           ;main.c: 65: {;main.c: 67: _delay((unsigned long)((100)*(64000000/4000.0)));
+   540  001796  0E09               	movlw	9
    541  001798  0100               	movlb	0	; () banked
    542  00179A  6FBF               	movwf	(??_main+1)& (0+255),b
-   543  00179C  0E2B               	movlw	43
+   543  00179C  0E1E               	movlw	30
    544  00179E  6FBE               	movwf	??_main& (0+255),b
-   545  0017A0  0E00               	movlw	0
+   545  0017A0  0EE4               	movlw	228
    546  0017A2                     u1797:
    547  0017A2  2EE8               	decfsz	wreg,f,c
    548  0017A4  D7FE               	bra	u1797
@@ -3189,7 +3189,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.05 build -831301201 
-Symbol Table                                                                                   Fri Feb 21 21:12:49 2020
+Symbol Table                                                                                   Sat Feb 22 12:58:58 2020
 
                 ___awdiv@sign 0006            USARTInit@baud_rate 00BA                  __CFG_CP0$OFF 000000  
                 __CFG_CP1$OFF 000000                  __CFG_CP2$OFF 000000                  __CFG_CP3$OFF 000000  

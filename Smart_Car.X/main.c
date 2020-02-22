@@ -64,7 +64,7 @@ void main(void)
     while(1)
     {
 
-   __delay_ms(1000);
+   __delay_ms(100);
         if(THERMAL==1)
         {
             RC1IF==1;

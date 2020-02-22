@@ -9913,7 +9913,7 @@ _delay((unsigned long)((100)*(64000000/4000.0)));
 while(1)
 {
 
-_delay((unsigned long)((1000)*(64000000/4000.0)));
+_delay((unsigned long)((100)*(64000000/4000.0)));
 if(PORTAbits.RA7==1)
 {
 RC1IF==1;
