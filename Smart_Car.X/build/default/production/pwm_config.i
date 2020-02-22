@@ -9670,33 +9670,122 @@ void pwm_config(void);
 void adc_config(void);
 void eusart_config(void);
 
-# 12 "pwm_config.c"
-int c,dty_car;
+# 13 "D:\Program Files\Microchip\xc8\v2.05\pic\include\c90\stdint.h"
+typedef signed char int8_t;
+
+# 20
+typedef signed int int16_t;
+
+# 28
+typedef __int24 int24_t;
+
+# 36
+typedef signed long int int32_t;
+
+# 52
+typedef unsigned char uint8_t;
+
+# 58
+typedef unsigned int uint16_t;
+
+# 65
+typedef __uint24 uint24_t;
+
+# 72
+typedef unsigned long int uint32_t;
+
+# 88
+typedef signed char int_least8_t;
+
+# 96
+typedef signed int int_least16_t;
+
+# 109
+typedef __int24 int_least24_t;
+
+# 118
+typedef signed long int int_least32_t;
+
+# 136
+typedef unsigned char uint_least8_t;
+
+# 143
+typedef unsigned int uint_least16_t;
+
+# 154
+typedef __uint24 uint_least24_t;
+
+# 162
+typedef unsigned long int uint_least32_t;
+
+# 181
+typedef signed char int_fast8_t;
+
+# 188
+typedef signed int int_fast16_t;
+
+# 200
+typedef __int24 int_fast24_t;
+
+# 208
+typedef signed long int int_fast32_t;
+
+# 224
+typedef unsigned char uint_fast8_t;
+
+# 230
+typedef unsigned int uint_fast16_t;
+
+# 240
+typedef __uint24 uint_fast24_t;
+
+# 247
+typedef unsigned long int uint_fast32_t;
+
+# 268
+typedef int32_t intmax_t;
+
+# 282
+typedef uint32_t uintmax_t;
+
+# 289
+typedef int16_t intptr_t;
+
+
+
+
+typedef uint16_t uintptr_t;
+
+# 34 "pwm_config.h"
+float read_Ibat(void);
+float read_Ubat(void);
+
+# 17 "pwm_config.c"
+void steering(uint8_t dty_left, uint8_t dty_right);
+
+
 float rez_adc_A,tens_A,Ibat,rez_adc_U,Ubat,tens;
 
-void left(int dty_car)
+void steering(uint8_t dty_left, uint8_t dty_right)
 {
-if(dty_car>100)
+uint8_t buffer;
+if(dty_left>100)
 {
-dty_car=100;
+dty_left=100;
 }
 
-c=dty_car*1.7;
-CCPR2L=c;
-
-
-
-
-}
-void right(int dty_car)
+if(dty_right > 100)
 {
-if(dty_car>100)
-{
-dty_car=100;
+dty_right=100;
 }
 
-c=dty_car*1.7;
-CCPR1L=c;
+
+buffer=dty_left*1.7;
+CCPR1L=buffer/2;
+buffer = dty_right*1.7;
+CCPR2L=buffer/2;
+
+
 
 }
 
@@ -9752,4 +9841,12 @@ while(1)
 }
 }
 return Ubat;
+}
+void steering_angle(uint8_t received_angle)
+{
+uint8_t my_angle_a = 0;
+uint8_t my_angle_b = 0;
+my_angle_a = (received_angle * 55)/100;
+my_angle_b = 100 - my_angle_a;
+steering(my_angle_a, my_angle_b);
 }

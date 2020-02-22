@@ -31,10 +31,10 @@
 
 
 #include <xc.h> // include processor files - each processor file is guarded.  
-void right(int dty_car);
-void left (int dty_car);
 float read_Ibat(void);
 float read_Ubat(void);
+
+
 // TODO Insert appropriate #include <>
 
 // TODO Insert C++ class definitions if appropriate

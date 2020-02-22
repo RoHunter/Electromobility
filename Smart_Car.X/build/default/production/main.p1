@@ -3,11 +3,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RC1IF `Vb ~T0 @X0 0 e@31989 ]
 "11288
 [v _RCREG1 `Vuc ~T0 @X0 0 e@4014 ]
-"3361
-[v _CCPR2L `Vuc ~T0 @X0 0 e@3943 ]
-"13432
-[v _CCPR1L `Vuc ~T0 @X0 0 e@4030 ]
-"7902
+"30 main.c
+[v _steering_angle `(v ~T0 @X0 0 ef1`uc ]
+[p mainexit ]
+"33 config.h
+[v _config `(v ~T0 @X0 0 ef ]
+"34
+[v _pwm_config `(v ~T0 @X0 0 ef ]
+"35
+[v _adc_config `(v ~T0 @X0 0 ef ]
+"36
+[v _eusart_config `(v ~T0 @X0 0 ef ]
+"7902 D:\Program Files\Microchip\xc8\v2.05\pic\include\pic18f46k22.h
 [s S384 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S384 . LATD0 LATD1 LATD2 LATD3 LATD4 LATD5 LATD6 LATD7 ]
 "7912
@@ -18,43 +25,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S383 . . . ]
 "7923
 [v _LATDbits `VS383 ~T0 @X0 0 e@3980 ]
-"8014
-[s S387 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S387 . LATE0 LATE1 LATE2 ]
-"8019
-[s S388 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S388 . LE0 LE1 LE2 ]
-"8013
-[u S386 `S387 1 `S388 1 ]
-[n S386 . . . ]
-"8025
-[v _LATEbits `VS386 ~T0 @X0 0 e@3981 ]
-"36 pwm_config.h
-[v _read_Ibat `(f ~T0 @X0 0 ef ]
-"194 D:\Program Files\Microchip\xc8\v2.05\pic\include\c90\stdio.h
-[v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
-"44 usart_pic16.h
-[v _USARTWriteString `(v ~T0 @X0 0 ef1`*Cuc ]
-"37 pwm_config.h
-[v _read_Ubat `(f ~T0 @X0 0 ef ]
+"3361
+[v _CCPR2L `Vuc ~T0 @X0 0 e@3943 ]
+"13432
+[v _CCPR1L `Vuc ~T0 @X0 0 e@4030 ]
+"15781
+[v _TMR1 `Vus ~T0 @X0 0 e@4046 ]
+"11630
+[v _TMR3 `Vus ~T0 @X0 0 e@4018 ]
 [v F5818 `(v ~T0 @X0 1 tf1`ul ]
 "183 D:\Program Files\Microchip\xc8\v2.05\pic\include\pic18.h
 [v __delay `JF5818 ~T0 @X0 0 e ]
 [p i __delay ]
-[p mainexit ]
-"33 config.h
-[v _config `(v ~T0 @X0 0 ef ]
-"34
-[v _pwm_config `(v ~T0 @X0 0 ef ]
-"35
-[v _adc_config `(v ~T0 @X0 0 ef ]
-"36
-[v _eusart_config `(v ~T0 @X0 0 ef ]
-"15781 D:\Program Files\Microchip\xc8\v2.05\pic\include\pic18f46k22.h
-[v _TMR1 `Vus ~T0 @X0 0 e@4046 ]
-"11630
-[v _TMR3 `Vus ~T0 @X0 0 e@4018 ]
-"6286
+"6286 D:\Program Files\Microchip\xc8\v2.05\pic\include\pic18f46k22.h
 [s S327 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S327 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 RA7 ]
 "6296
@@ -6797,10 +6780,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;config.h: 34: void pwm_config(void);
 [; ;config.h: 35: void adc_config(void);
 [; ;config.h: 36: void eusart_config(void);
-[; ;pwm_config.h: 34: void right(int dty_car);
-[; ;pwm_config.h: 35: void left (int dty_car);
-[; ;pwm_config.h: 36: float read_Ibat(void);
-[; ;pwm_config.h: 37: float read_Ubat(void);
+[; ;pwm_config.h: 34: float read_Ibat(void);
+[; ;pwm_config.h: 35: float read_Ubat(void);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef __int24 int24_t;
@@ -6854,456 +6835,142 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;usart_pic16.h: 57: void USART2WriteString(const char *str);
 [; ;usart_pic16.h: 58: void USART2GotoNewLine();
 [; ;usart_pic16.h: 59: void USART2WriteInt(int16_t val, int8_t field_length);
-"30 main.c
+[; ;main.c: 30: void steering_angle(uint8_t received_angle);
+"32 main.c
 [v _str_V `uc ~T0 @X0 -> 8 `i e ]
 [v _str_A `uc ~T0 @X0 -> 8 `i e ]
-[; ;main.c: 30: char str_V[8],str_A[8];
-"31
+[; ;main.c: 32: char str_V[8],str_A[8];
+"33
 [v _rez_adc_A `f ~T0 @X0 1 e ]
 [v _tens_A `f ~T0 @X0 1 e ]
 [v _Ibat `f ~T0 @X0 1 e ]
 [v _rez_adc_U `f ~T0 @X0 1 e ]
 [v _Ubat `f ~T0 @X0 1 e ]
 [v _tens `f ~T0 @X0 1 e ]
-[; ;main.c: 31: float rez_adc_A,tens_A,Ibat,rez_adc_U,Ubat,tens;
-"32
+[; ;main.c: 33: float rez_adc_A,tens_A,Ibat,rez_adc_U,Ubat,tens;
+"34
 [v _cor `ui ~T0 @X0 1 e ]
 [v _TMR `ui ~T0 @X0 1 e ]
 [v _distanta `ui ~T0 @X0 1 e ]
-[; ;main.c: 32: unsigned int cor,TMR,distanta;
-"33
+[; ;main.c: 34: unsigned int cor,TMR,distanta;
+"35
 [v _timp_us `ul ~T0 @X0 1 e ]
 [i _timp_us
 -> -> -> 0 `i `l `ul
 ]
-[; ;main.c: 33: unsigned long timp_us = 0;
+[; ;main.c: 35: unsigned long timp_us = 0;
 [v $root$_serial `(v ~T0 @X0 0 e ]
-[v F6037 `(v ~T0 @X0 1 tf ]
-"35
-[v _serial `IF6037 ~T0 @X0 1 e ]
-"36
+[v F6035 `(v ~T0 @X0 1 tf ]
+"37
+[v _serial `IF6035 ~T0 @X0 1 e ]
+"38
 {
-[; ;main.c: 35: void interrupt serial(void)
-[; ;main.c: 36: {
+[; ;main.c: 37: void interrupt serial(void)
+[; ;main.c: 38: {
 [e :U _serial ]
 [f ]
-[v _str_V `uc ~T0 @X0 -> 8 `i a ]
-[v _str_A `uc ~T0 @X0 -> 8 `i a ]
-"38
-[v _i `f ~T0 @X0 1 a ]
-[v _j `f ~T0 @X0 1 a ]
-[; ;main.c: 37: char str_V[8],str_A[8];
-[; ;main.c: 38: float i,j;
-[; ;main.c: 40: if (RC1IF==1)
-"40
-[e $ ! == -> _RC1IF `i -> 1 `i 851  ]
-[; ;main.c: 41: {
-"41
-{
+[; ;main.c: 42: if(RC1IF==1)
 "42
-[v _flag `i ~T0 @X0 1 a ]
-[; ;main.c: 42: int flag=0;
-[e = _flag -> 0 `i ]
-[; ;main.c: 44: flag=RCREG1;
+[e $ ! == -> _RC1IF `i -> 1 `i 851  ]
+[; ;main.c: 43: {
+"43
+{
+[; ;main.c: 44: RC1IF=0;
 "44
-[e = _flag -> _RCREG1 `i ]
-[; ;main.c: 46: switch(flag)
+[e = _RC1IF -> -> 0 `i `b ]
+"45
+[v _angle_from_pi `uc ~T0 @X0 1 a ]
+[; ;main.c: 45: uint8_t angle_from_pi=0;
+[e = _angle_from_pi -> -> 0 `i `uc ]
+[; ;main.c: 46: angle_from_pi=RCREG1;
 "46
-[e $U 853  ]
-[; ;main.c: 47: {
+[e = _angle_from_pi _RCREG1 ]
+[; ;main.c: 47: steering_angle(angle_from_pi);
 "47
-{
-[; ;main.c: 48: case 0x66:
+[e ( _steering_angle (1 _angle_from_pi ]
 "48
-[e :U 854 ]
-[; ;main.c: 49: CCPR2L=CCPR1L=60;
-"49
-[e = _CCPR2L = _CCPR1L -> -> 60 `i `uc ]
-[; ;main.c: 50: LATDbits.LD1=LATDbits.LD2=1;
-"50
-[e = . . _LATDbits 1 1 = . . _LATDbits 1 2 -> -> 1 `i `uc ]
-[; ;main.c: 51: LATDbits.LD0=0;
-"51
-[e = . . _LATDbits 1 0 -> -> 0 `i `uc ]
-[; ;main.c: 52: break;
-"52
-[e $U 852  ]
-[; ;main.c: 54: case 0x53:
-"54
-[e :U 855 ]
-[; ;main.c: 55: CCPR2L=CCPR1L=0;
-"55
-[e = _CCPR2L = _CCPR1L -> -> 0 `i `uc ]
-[; ;main.c: 56: LATDbits.LD0=1;
-"56
-[e = . . _LATDbits 1 0 -> -> 1 `i `uc ]
-[; ;main.c: 57: break;
-"57
-[e $U 852  ]
-[; ;main.c: 59: case 0x4c:
-"59
-[e :U 856 ]
-[; ;main.c: 60: CCPR2L=80;
-"60
-[e = _CCPR2L -> -> 80 `i `uc ]
-[; ;main.c: 61: CCPR1L= 30;
-"61
-[e = _CCPR1L -> -> 30 `i `uc ]
-[; ;main.c: 62: LATDbits.LD0=0;
-"62
-[e = . . _LATDbits 1 0 -> -> 0 `i `uc ]
-[; ;main.c: 63: break;
-"63
-[e $U 852  ]
-[; ;main.c: 65: case 0x52:
-"65
-[e :U 857 ]
-[; ;main.c: 66: CCPR1L=80;
-"66
-[e = _CCPR1L -> -> 80 `i `uc ]
-[; ;main.c: 67: CCPR2L=20;
-"67
-[e = _CCPR2L -> -> 20 `i `uc ]
-[; ;main.c: 68: LATDbits.LD0=0;
-"68
-[e = . . _LATDbits 1 0 -> -> 0 `i `uc ]
-[; ;main.c: 69: break;
-"69
-[e $U 852  ]
-[; ;main.c: 71: case 0x42:
-"71
-[e :U 858 ]
-[; ;main.c: 72: CCPR2L=CCPR1L=60;
-"72
-[e = _CCPR2L = _CCPR1L -> -> 60 `i `uc ]
-[; ;main.c: 73: LATDbits.LD1=LATDbits.LD2=0;
-"73
-[e = . . _LATDbits 1 1 = . . _LATDbits 1 2 -> -> 0 `i `uc ]
-[; ;main.c: 74: LATDbits.LD0=0;
-"74
-[e = . . _LATDbits 1 0 -> -> 0 `i `uc ]
-[; ;main.c: 75: break;
-"75
-[e $U 852  ]
-[; ;main.c: 77: case 0x49:
-"77
-[e :U 859 ]
-[; ;main.c: 78: CCPR1L=70;
-"78
-[e = _CCPR1L -> -> 70 `i `uc ]
-[; ;main.c: 79: CCPR2L=70;
-"79
-[e = _CCPR2L -> -> 70 `i `uc ]
-[; ;main.c: 80: LATDbits.LD0=0;
-"80
-[e = . . _LATDbits 1 0 -> -> 0 `i `uc ]
-[; ;main.c: 81: LATDbits.LD1=1;
-"81
-[e = . . _LATDbits 1 1 -> -> 1 `i `uc ]
-[; ;main.c: 82: LATDbits.LD2=0;
-"82
-[e = . . _LATDbits 1 2 -> -> 0 `i `uc ]
-[; ;main.c: 83: break;
-"83
-[e $U 852  ]
-[; ;main.c: 87: case 0x7a:
-"87
-[e :U 860 ]
-[; ;main.c: 88: CCPR2L=CCPR1L=0;
-"88
-[e = _CCPR2L = _CCPR1L -> -> 0 `i `uc ]
-[; ;main.c: 89: LATDbits.LD0=1;
-"89
-[e = . . _LATDbits 1 0 -> -> 1 `i `uc ]
-[; ;main.c: 90: LATEbits.LE0=1;
-"90
-[e = . . _LATEbits 1 0 -> -> 1 `i `uc ]
-[; ;main.c: 91: LATEbits.LE1=1;
-"91
-[e = . . _LATEbits 1 1 -> -> 1 `i `uc ]
-[; ;main.c: 92: LATEbits.LE2=0;
-"92
-[e = . . _LATEbits 1 2 -> -> 0 `i `uc ]
-[; ;main.c: 93: break;
-"93
-[e $U 852  ]
-[; ;main.c: 95: case 0x48:
-"95
-[e :U 861 ]
-[; ;main.c: 96: CCPR2L=CCPR1L=0;
-"96
-[e = _CCPR2L = _CCPR1L -> -> 0 `i `uc ]
-[; ;main.c: 97: LATDbits.LD0=1;
-"97
-[e = . . _LATDbits 1 0 -> -> 1 `i `uc ]
-[; ;main.c: 98: LATEbits.LE0=1;
-"98
-[e = . . _LATEbits 1 0 -> -> 1 `i `uc ]
-[; ;main.c: 99: LATEbits.LE2=1;
-"99
-[e = . . _LATEbits 1 2 -> -> 1 `i `uc ]
-[; ;main.c: 100: LATEbits.LE1=0;
-"100
-[e = . . _LATEbits 1 1 -> -> 0 `i `uc ]
-[; ;main.c: 101: break;
-"101
-[e $U 852  ]
-[; ;main.c: 103: case 0x61:
-"103
-[e :U 862 ]
-[; ;main.c: 104: i=read_Ibat();
-"104
-[e = _i ( _read_Ibat ..  ]
-[; ;main.c: 105: sprintf(str_A, "%.2f", i);
-"105
-[e ( _sprintf (1 , (. , &U _str_A :s 1C -> _i `d ]
-[; ;main.c: 106: USARTWriteString(str_A);
-"106
-[e ( _USARTWriteString (1 -> &U _str_A `*Cuc ]
-[; ;main.c: 107: break;
-"107
-[e $U 852  ]
-[; ;main.c: 109: case 0x76:
-"109
-[e :U 863 ]
-[; ;main.c: 110: j=read_Ubat();
-"110
-[e = _j ( _read_Ubat ..  ]
-[; ;main.c: 111: sprintf(str_V, "%.1f", j);
-"111
-[e ( _sprintf (1 , (. , &U _str_V :s 2C -> _j `d ]
-[; ;main.c: 112: USARTWriteString(str_V);
-"112
-[e ( _USARTWriteString (1 -> &U _str_V `*Cuc ]
-[; ;main.c: 113: break;
-"113
-[e $U 852  ]
-[; ;main.c: 115: case 0x6F:
-"115
-[e :U 864 ]
-[; ;main.c: 116: LATEbits.LE0=1;
-"116
-[e = . . _LATEbits 1 0 -> -> 1 `i `uc ]
-[; ;main.c: 117: break;
-"117
-[e $U 852  ]
-[; ;main.c: 119: case 0x82:
-"119
-[e :U 865 ]
-[; ;main.c: 120: CCPR2L=CCPR1L=0;
-"120
-[e = _CCPR2L = _CCPR1L -> -> 0 `i `uc ]
-[; ;main.c: 121: LATDbits.LD0=1;
-"121
-[e = . . _LATDbits 1 0 -> -> 1 `i `uc ]
-[; ;main.c: 122: _delay((unsigned long)((2000)*(64000000/4000.0)));
-"122
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;main.c: 123: CCPR2L=CCPR1L=30;
-"123
-[e = _CCPR2L = _CCPR1L -> -> 30 `i `uc ]
-[; ;main.c: 124: break;
-"124
-[e $U 852  ]
-[; ;main.c: 126: case 0x81:
-"126
-[e :U 866 ]
-[; ;main.c: 127: CCPR2L=CCPR1L=0;
-"127
-[e = _CCPR2L = _CCPR1L -> -> 0 `i `uc ]
-[; ;main.c: 128: LATDbits.LD0=1;
-"128
-[e = . . _LATDbits 1 0 -> -> 1 `i `uc ]
-[; ;main.c: 129: _delay((unsigned long)((1000)*(64000000/4000.0)));
-"129
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;main.c: 130: CCPR2L=CCPR1L=30;
-"130
-[e = _CCPR2L = _CCPR1L -> -> 30 `i `uc ]
-[; ;main.c: 131: LATDbits.LD0=0;
-"131
-[e = . . _LATDbits 1 0 -> -> 0 `i `uc ]
-[; ;main.c: 132: break;
-"132
-[e $U 852  ]
-[; ;main.c: 134: case 0x80:
-"134
-[e :U 867 ]
-[; ;main.c: 135: CCPR2L=CCPR1L=0;
-"135
-[e = _CCPR2L = _CCPR1L -> -> 0 `i `uc ]
-[; ;main.c: 136: LATDbits.LD0=1;
-"136
-[e = . . _LATDbits 1 0 -> -> 1 `i `uc ]
-[; ;main.c: 137: _delay((unsigned long)((2000)*(64000000/4000.0)));
-"137
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;main.c: 138: while(1)
-"138
-[e :U 869 ]
-[; ;main.c: 139: {
-"139
-{
-[; ;main.c: 140: _delay((unsigned long)((2000)*(64000000/4000.0)));
-"140
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"141
-}
-[e :U 868 ]
-"138
-[e $U 869  ]
-[e :U 870 ]
-[; ;main.c: 141: }
-[; ;main.c: 142: break;
-"142
-[e $U 852  ]
-[; ;main.c: 144: case 0x44:
-"144
-[e :U 871 ]
-[; ;main.c: 145: CCPR2L=CCPR1L=0;
-"145
-[e = _CCPR2L = _CCPR1L -> -> 0 `i `uc ]
-[; ;main.c: 146: LATDbits.LD0=1;
-"146
-[e = . . _LATDbits 1 0 -> -> 1 `i `uc ]
-[; ;main.c: 147: _delay((unsigned long)((3000)*(64000000/4000.0)));
-"147
-[e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;main.c: 148: CCPR2L=CCPR1L=30;
-"148
-[e = _CCPR2L = _CCPR1L -> -> 30 `i `uc ]
-[; ;main.c: 149: break;
-"149
-[e $U 852  ]
-[; ;main.c: 151: case 0x47:
-"151
-[e :U 872 ]
-[; ;main.c: 152: LATDbits.LD1=1;
-"152
-[e = . . _LATDbits 1 1 -> -> 1 `i `uc ]
-[; ;main.c: 153: LATDbits.LD2=0;
-"153
-[e = . . _LATDbits 1 2 -> -> 0 `i `uc ]
-[; ;main.c: 154: CCPR2L=CCPR1L=140;
-"154
-[e = _CCPR2L = _CCPR1L -> -> 140 `i `uc ]
-[; ;main.c: 155: break;
-"155
-[e $U 852  ]
-"158
-}
-[; ;main.c: 158: }
-[e $U 852  ]
-"46
-[e :U 853 ]
-[e [\ _flag , $ -> 102 `i 854
- , $ -> 83 `i 855
- , $ -> 76 `i 856
- , $ -> 82 `i 857
- , $ -> 66 `i 858
- , $ -> 73 `i 859
- , $ -> 122 `i 860
- , $ -> 72 `i 861
- , $ -> 97 `i 862
- , $ -> 118 `i 863
- , $ -> 111 `i 864
- , $ -> 130 `i 865
- , $ -> 129 `i 866
- , $ -> 128 `i 867
- , $ -> 68 `i 871
- , $ -> 71 `i 872
- 852 ]
-"158
-[e :U 852 ]
-"159
 }
 [e :U 851 ]
-[; ;main.c: 159: }
-[; ;main.c: 160: RC1IF=0;
-"160
-[e = _RC1IF -> -> 0 `i `b ]
-[; ;main.c: 162: }
-"162
+[; ;main.c: 48: }
+[; ;main.c: 49: }
+"49
 [e :UE 850 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"164
+"51
 [v _main `(v ~T0 @X0 1 ef ]
-"165
+"52
 {
-[; ;main.c: 164: void main(void)
-[; ;main.c: 165: {
+[; ;main.c: 51: void main(void)
+[; ;main.c: 52: {
 [e :U _main ]
 [f ]
-[; ;main.c: 166: config();
-"166
+[; ;main.c: 53: config();
+"53
 [e ( _config ..  ]
-[; ;main.c: 167: pwm_config();
-"167
+[; ;main.c: 54: pwm_config();
+"54
 [e ( _pwm_config ..  ]
-[; ;main.c: 168: adc_config();
-"168
+[; ;main.c: 55: adc_config();
+"55
 [e ( _adc_config ..  ]
-[; ;main.c: 169: eusart_config();
-"169
+[; ;main.c: 56: eusart_config();
+"56
 [e ( _eusart_config ..  ]
-[; ;main.c: 170: LATDbits.LD0=0;
-"170
+[; ;main.c: 57: LATDbits.LD0=0;
+"57
 [e = . . _LATDbits 1 0 -> -> 0 `i `uc ]
-[; ;main.c: 171: LATDbits.LD1=1;
-"171
+[; ;main.c: 58: LATDbits.LD1=1;
+"58
 [e = . . _LATDbits 1 1 -> -> 1 `i `uc ]
-[; ;main.c: 172: LATDbits.LD2=LATDbits.LD1;
-"172
+[; ;main.c: 59: LATDbits.LD2=LATDbits.LD1;
+"59
 [e = . . _LATDbits 1 2 . . _LATDbits 1 1 ]
-[; ;main.c: 173: CCPR2L=CCPR1L=0;
-"173
+[; ;main.c: 60: CCPR2L=CCPR1L=0;
+"60
 [e = _CCPR2L = _CCPR1L -> -> 0 `i `uc ]
-[; ;main.c: 174: TMR1=TMR3=0;
-"174
+[; ;main.c: 61: TMR1=TMR3=0;
+"61
 [e = _TMR1 = _TMR3 -> -> 0 `i `us ]
-[; ;main.c: 175: _delay((unsigned long)((100)*(64000000/4000.0)));
-"175
+[; ;main.c: 62: _delay((unsigned long)((100)*(64000000/4000.0)));
+"62
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;main.c: 177: while(1)
-"177
-[e :U 875 ]
-[; ;main.c: 178: {
-"178
+[; ;main.c: 64: while(1)
+"64
+[e :U 854 ]
+[; ;main.c: 65: {
+"65
 {
-[; ;main.c: 180: _delay((unsigned long)((1000)*(64000000/4000.0)));
-"180
+[; ;main.c: 67: _delay((unsigned long)((1000)*(64000000/4000.0)));
+"67
 [e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;main.c: 181: if(PORTAbits.RA7==1)
-"181
-[e $ ! == -> . . _PORTAbits 0 7 `i -> 1 `i 877  ]
-[; ;main.c: 182: {
-"182
+[; ;main.c: 68: if(PORTAbits.RA7==1)
+"68
+[e $ ! == -> . . _PORTAbits 0 7 `i -> 1 `i 856  ]
+[; ;main.c: 69: {
+"69
 {
-[; ;main.c: 183: RC1IF==1;
-"183
+[; ;main.c: 70: RC1IF==1;
+"70
 [e == -> _RC1IF `i -> 1 `i ]
-[; ;main.c: 184: CCPR2L=CCPR1L=0;
-"184
+[; ;main.c: 71: CCPR2L=CCPR1L=0;
+"71
 [e = _CCPR2L = _CCPR1L -> -> 0 `i `uc ]
-[; ;main.c: 185: LATDbits.LD0=1;
-"185
+[; ;main.c: 72: LATDbits.LD0=1;
+"72
 [e = . . _LATDbits 1 0 -> -> 1 `i `uc ]
-"186
+"73
 }
-[e :U 877 ]
-"187
+[e :U 856 ]
+"74
 }
-[e :U 874 ]
-"177
-[e $U 875  ]
-[e :U 876 ]
-[; ;main.c: 186: }
-[; ;main.c: 187: }
-[; ;main.c: 190: }
-"190
-[e :UE 873 ]
+[e :U 853 ]
+"64
+[e $U 854  ]
+[e :U 855 ]
+[; ;main.c: 73: }
+[; ;main.c: 74: }
+[; ;main.c: 77: }
+"77
+[e :UE 852 ]
 }
-[p f _sprintf 8462336 ]
-[a 1C 37 46 50 102 0 ]
-[a 2C 37 46 49 102 0 ]

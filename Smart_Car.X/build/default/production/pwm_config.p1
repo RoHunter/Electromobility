@@ -1,8 +1,8 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"3361 D:\Program Files\Microchip\xc8\v2.05\pic\include\pic18f46k22.h
-[v _CCPR2L `Vuc ~T0 @X0 0 e@3943 ]
-"13432
+"13432 D:\Program Files\Microchip\xc8\v2.05\pic\include\pic18f46k22.h
 [v _CCPR1L `Vuc ~T0 @X0 0 e@4030 ]
+"3361
+[v _CCPR2L `Vuc ~T0 @X0 0 e@3943 ]
 "13611
 [v _ADCON0 `Vuc ~T0 @X0 0 e@4034 ]
 [v F5818 `(v ~T0 @X0 1 tf1`ul ]
@@ -6683,252 +6683,304 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;config.h: 34: void pwm_config(void);
 [; ;config.h: 35: void adc_config(void);
 [; ;config.h: 36: void eusart_config(void);
-"12 pwm_config.c
-[v _c `i ~T0 @X0 1 e ]
-[v _dty_car `i ~T0 @X0 1 e ]
-[; ;pwm_config.c: 12: int c,dty_car;
-"13
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef __int24 int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 52: typedef unsigned char uint8_t;
+[; ;stdint.h: 58: typedef unsigned int uint16_t;
+[; ;stdint.h: 65: typedef __uint24 uint24_t;
+[; ;stdint.h: 72: typedef unsigned long int uint32_t;
+[; ;stdint.h: 88: typedef signed char int_least8_t;
+[; ;stdint.h: 96: typedef signed int int_least16_t;
+[; ;stdint.h: 109: typedef __int24 int_least24_t;
+[; ;stdint.h: 118: typedef signed long int int_least32_t;
+[; ;stdint.h: 136: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 143: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 154: typedef __uint24 uint_least24_t;
+[; ;stdint.h: 162: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 181: typedef signed char int_fast8_t;
+[; ;stdint.h: 188: typedef signed int int_fast16_t;
+[; ;stdint.h: 200: typedef __int24 int_fast24_t;
+[; ;stdint.h: 208: typedef signed long int int_fast32_t;
+[; ;stdint.h: 224: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 230: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 240: typedef __uint24 uint_fast24_t;
+[; ;stdint.h: 247: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 268: typedef int32_t intmax_t;
+[; ;stdint.h: 282: typedef uint32_t uintmax_t;
+[; ;stdint.h: 289: typedef int16_t intptr_t;
+[; ;stdint.h: 294: typedef uint16_t uintptr_t;
+[; ;pwm_config.h: 34: float read_Ibat(void);
+[; ;pwm_config.h: 35: float read_Ubat(void);
+[; ;pwm_config.c: 17: void steering(uint8_t dty_left, uint8_t dty_right);
+"20 pwm_config.c
 [v _rez_adc_A `f ~T0 @X0 1 e ]
 [v _tens_A `f ~T0 @X0 1 e ]
 [v _Ibat `f ~T0 @X0 1 e ]
 [v _rez_adc_U `f ~T0 @X0 1 e ]
 [v _Ubat `f ~T0 @X0 1 e ]
 [v _tens `f ~T0 @X0 1 e ]
-[; ;pwm_config.c: 13: float rez_adc_A,tens_A,Ibat,rez_adc_U,Ubat,tens;
-"15
-[v _left `(v ~T0 @X0 1 ef1`i ]
-"16
+[; ;pwm_config.c: 20: float rez_adc_A,tens_A,Ibat,rez_adc_U,Ubat,tens;
+"22
+[v _steering `(v ~T0 @X0 1 ef2`uc`uc ]
+"23
 {
-[; ;pwm_config.c: 15: void left(int dty_car)
-[; ;pwm_config.c: 16: {
-[e :U _left ]
-[v _dty_car `i ~T0 @X0 1 r1 ]
+[; ;pwm_config.c: 22: void steering(uint8_t dty_left, uint8_t dty_right)
+[; ;pwm_config.c: 23: {
+[e :U _steering ]
+"22
+[v _dty_left `uc ~T0 @X0 1 r1 ]
+[v _dty_right `uc ~T0 @X0 1 r2 ]
+"23
 [f ]
-[; ;pwm_config.c: 17: if(dty_car>100)
-"17
-[e $ ! > _dty_car -> 100 `i 850  ]
-[; ;pwm_config.c: 18: {
-"18
+"24
+[v _buffer `uc ~T0 @X0 1 a ]
+[; ;pwm_config.c: 24: uint8_t buffer;
+[; ;pwm_config.c: 25: if(dty_left>100)
+"25
+[e $ ! > -> _dty_left `i -> 100 `i 850  ]
+[; ;pwm_config.c: 26: {
+"26
 {
-[; ;pwm_config.c: 19: dty_car=100;
-"19
-[e = _dty_car -> 100 `i ]
-"20
+[; ;pwm_config.c: 27: dty_left=100;
+"27
+[e = _dty_left -> -> 100 `i `uc ]
+"28
 }
 [e :U 850 ]
-[; ;pwm_config.c: 20: }
-[; ;pwm_config.c: 22: c=dty_car*1.7;
-"22
-[e = _c -> * -> _dty_car `d .1.7 `i ]
-[; ;pwm_config.c: 23: CCPR2L=c;
-"23
-[e = _CCPR2L -> _c `uc ]
 [; ;pwm_config.c: 28: }
-"28
+[; ;pwm_config.c: 30: if(dty_right > 100)
+"30
+[e $ ! > -> _dty_right `i -> 100 `i 851  ]
+[; ;pwm_config.c: 31: {
+"31
+{
+[; ;pwm_config.c: 32: dty_right=100;
+"32
+[e = _dty_right -> -> 100 `i `uc ]
+"33
+}
+[e :U 851 ]
+[; ;pwm_config.c: 33: }
+[; ;pwm_config.c: 36: buffer=dty_left*1.7;
+"36
+[e = _buffer -> * -> _dty_left `d .1.7 `uc ]
+[; ;pwm_config.c: 37: CCPR1L=buffer/2;
+"37
+[e = _CCPR1L -> / -> _buffer `i -> 2 `i `uc ]
+[; ;pwm_config.c: 38: buffer = dty_right*1.7;
+"38
+[e = _buffer -> * -> _dty_right `d .1.7 `uc ]
+[; ;pwm_config.c: 39: CCPR2L=buffer/2;
+"39
+[e = _CCPR2L -> / -> _buffer `i -> 2 `i `uc ]
+[; ;pwm_config.c: 43: }
+"43
 [e :UE 849 ]
 }
-"29
-[v _right `(v ~T0 @X0 1 ef1`i ]
-"30
-{
-[; ;pwm_config.c: 29: void right(int dty_car)
-[; ;pwm_config.c: 30: {
-[e :U _right ]
-[v _dty_car `i ~T0 @X0 1 r1 ]
-[f ]
-[; ;pwm_config.c: 31: if(dty_car>100)
-"31
-[e $ ! > _dty_car -> 100 `i 852  ]
-[; ;pwm_config.c: 32: {
-"32
-{
-[; ;pwm_config.c: 33: dty_car=100;
-"33
-[e = _dty_car -> 100 `i ]
-"34
-}
-[e :U 852 ]
-[; ;pwm_config.c: 34: }
-[; ;pwm_config.c: 36: c=dty_car*1.7;
-"36
-[e = _c -> * -> _dty_car `d .1.7 `i ]
-[; ;pwm_config.c: 37: CCPR1L=c;
-"37
-[e = _CCPR1L -> _c `uc ]
-[; ;pwm_config.c: 39: }
-"39
-[e :UE 851 ]
-}
-"41
+"45
 [v _read_Ibat `(f ~T0 @X0 1 ef ]
-"42
+"46
 {
-[; ;pwm_config.c: 41: float read_Ibat(void)
-[; ;pwm_config.c: 42: {
+[; ;pwm_config.c: 45: float read_Ibat(void)
+[; ;pwm_config.c: 46: {
 [e :U _read_Ibat ]
 [f ]
-[; ;pwm_config.c: 43: ADCON0=0b00000011;
-"43
-[e = _ADCON0 -> -> 3 `i `uc ]
-[; ;pwm_config.c: 44: _delay((unsigned long)((10)*(64000000/4000.0)));
-"44
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;pwm_config.c: 45: ADCON0bits.GO=1;
-"45
-[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
-[; ;pwm_config.c: 46: _delay((unsigned long)((10)*(64000000/4000.0)));
-"46
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;pwm_config.c: 47: rez_adc_A=ADRESH;
+[; ;pwm_config.c: 47: ADCON0=0b00000011;
 "47
-[e = _rez_adc_A -> _ADRESH `f ]
-[; ;pwm_config.c: 48: tens_A=rez_adc_A*0.012890625;
+[e = _ADCON0 -> -> 3 `i `uc ]
+[; ;pwm_config.c: 48: _delay((unsigned long)((10)*(64000000/4000.0)));
 "48
-[e = _tens_A -> * -> _rez_adc_A `d .0.012890625 `f ]
-[; ;pwm_config.c: 49: Ibat=tens_A;
-"49
-[e = _Ibat _tens_A ]
-[; ;pwm_config.c: 50: if(Ibat>10)
-"50
-[e $ ! > _Ibat -> -> 10 `i `f 854  ]
-[; ;pwm_config.c: 51: {
-"51
-{
-[; ;pwm_config.c: 52: _delay((unsigned long)((10)*(64000000/4000.0)));
-"52
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;pwm_config.c: 53: CCPR1L=0;
+[; ;pwm_config.c: 49: ADCON0bits.GO=1;
+"49
+[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
+[; ;pwm_config.c: 50: _delay((unsigned long)((10)*(64000000/4000.0)));
+"50
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;pwm_config.c: 51: rez_adc_A=ADRESH;
+"51
+[e = _rez_adc_A -> _ADRESH `f ]
+[; ;pwm_config.c: 52: tens_A=rez_adc_A*0.012890625;
+"52
+[e = _tens_A -> * -> _rez_adc_A `d .0.012890625 `f ]
+[; ;pwm_config.c: 53: Ibat=tens_A;
 "53
-[e = _CCPR1L -> -> 0 `i `uc ]
-[; ;pwm_config.c: 54: CCPR2L=0;
+[e = _Ibat _tens_A ]
+[; ;pwm_config.c: 54: if(Ibat>10)
 "54
-[e = _CCPR2L -> -> 0 `i `uc ]
-[; ;pwm_config.c: 55: while(1)
+[e $ ! > _Ibat -> -> 10 `i `f 853  ]
+[; ;pwm_config.c: 55: {
 "55
-[e :U 856 ]
-[; ;pwm_config.c: 56: {
-"56
 {
-[; ;pwm_config.c: 57: _delay((unsigned long)((100)*(64000000/4000.0)));
+[; ;pwm_config.c: 56: _delay((unsigned long)((10)*(64000000/4000.0)));
+"56
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;pwm_config.c: 57: CCPR1L=0;
 "57
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[e = _CCPR1L -> -> 0 `i `uc ]
+[; ;pwm_config.c: 58: CCPR2L=0;
 "58
-}
-[e :U 855 ]
-"55
-[e $U 856  ]
-[e :U 857 ]
+[e = _CCPR2L -> -> 0 `i `uc ]
+[; ;pwm_config.c: 59: while(1)
 "59
+[e :U 855 ]
+[; ;pwm_config.c: 60: {
+"60
+{
+[; ;pwm_config.c: 61: _delay((unsigned long)((100)*(64000000/4000.0)));
+"61
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"62
 }
 [e :U 854 ]
-[; ;pwm_config.c: 58: }
-[; ;pwm_config.c: 59: }
-[; ;pwm_config.c: 60: return Ibat;
-"60
-[e ) _Ibat ]
-[e $UE 853  ]
-[; ;pwm_config.c: 61: }
-"61
-[e :UE 853 ]
-}
+"59
+[e $U 855  ]
+[e :U 856 ]
 "63
-[v _read_Ubat `(f ~T0 @X0 1 ef ]
+}
+[e :U 853 ]
+[; ;pwm_config.c: 62: }
+[; ;pwm_config.c: 63: }
+[; ;pwm_config.c: 64: return Ibat;
 "64
+[e ) _Ibat ]
+[e $UE 852  ]
+[; ;pwm_config.c: 65: }
+"65
+[e :UE 852 ]
+}
+"67
+[v _read_Ubat `(f ~T0 @X0 1 ef ]
+"68
 {
-[; ;pwm_config.c: 63: float read_Ubat(void)
-[; ;pwm_config.c: 64: {
+[; ;pwm_config.c: 67: float read_Ubat(void)
+[; ;pwm_config.c: 68: {
 [e :U _read_Ubat ]
 [f ]
-[; ;pwm_config.c: 65: ADCON0=0b00000111;
-"65
-[e = _ADCON0 -> -> 7 `i `uc ]
-[; ;pwm_config.c: 66: _delay((unsigned long)((10)*(64000000/4000.0)));
-"66
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;pwm_config.c: 67: ADCON0bits.GO=1;
-"67
-[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
-[; ;pwm_config.c: 68: _delay((unsigned long)((10)*(64000000/4000.0)));
-"68
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;pwm_config.c: 69: rez_adc_U=ADRESH;
+[; ;pwm_config.c: 69: ADCON0=0b00000111;
 "69
-[e = _rez_adc_U -> _ADRESH `f ]
-[; ;pwm_config.c: 70: tens=rez_adc_U*0.012890625;
+[e = _ADCON0 -> -> 7 `i `uc ]
+[; ;pwm_config.c: 70: _delay((unsigned long)((10)*(64000000/4000.0)));
 "70
-[e = _tens -> * -> _rez_adc_U `d .0.012890625 `f ]
-[; ;pwm_config.c: 71: Ubat=tens/0.2;
-"71
-[e = _Ubat -> / -> _tens `d .0.2 `f ]
-[; ;pwm_config.c: 72: if(Ubat>16)
-"72
-[e $ ! > _Ubat -> -> 16 `i `f 859  ]
-[; ;pwm_config.c: 73: {
-"73
-{
-[; ;pwm_config.c: 74: _delay((unsigned long)((10)*(64000000/4000.0)));
-"74
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;pwm_config.c: 75: CCPR1L=0;
+[; ;pwm_config.c: 71: ADCON0bits.GO=1;
+"71
+[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
+[; ;pwm_config.c: 72: _delay((unsigned long)((10)*(64000000/4000.0)));
+"72
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;pwm_config.c: 73: rez_adc_U=ADRESH;
+"73
+[e = _rez_adc_U -> _ADRESH `f ]
+[; ;pwm_config.c: 74: tens=rez_adc_U*0.012890625;
+"74
+[e = _tens -> * -> _rez_adc_U `d .0.012890625 `f ]
+[; ;pwm_config.c: 75: Ubat=tens/0.2;
 "75
-[e = _CCPR1L -> -> 0 `i `uc ]
-[; ;pwm_config.c: 76: CCPR2L=0;
+[e = _Ubat -> / -> _tens `d .0.2 `f ]
+[; ;pwm_config.c: 76: if(Ubat>16)
 "76
-[e = _CCPR2L -> -> 0 `i `uc ]
-[; ;pwm_config.c: 77: while(1)
+[e $ ! > _Ubat -> -> 16 `i `f 858  ]
+[; ;pwm_config.c: 77: {
 "77
-[e :U 861 ]
-[; ;pwm_config.c: 78: {
-"78
 {
+[; ;pwm_config.c: 78: _delay((unsigned long)((10)*(64000000/4000.0)));
+"78
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;pwm_config.c: 79: CCPR1L=0;
+"79
+[e = _CCPR1L -> -> 0 `i `uc ]
+[; ;pwm_config.c: 80: CCPR2L=0;
 "80
-}
-[e :U 860 ]
-"77
-[e $U 861  ]
-[e :U 862 ]
+[e = _CCPR2L -> -> 0 `i `uc ]
+[; ;pwm_config.c: 81: while(1)
 "81
+[e :U 860 ]
+[; ;pwm_config.c: 82: {
+"82
+{
+"84
 }
 [e :U 859 ]
-[; ;pwm_config.c: 80: }
-[; ;pwm_config.c: 81: }
-[; ;pwm_config.c: 82: if(Ubat<10)
-"82
-[e $ ! < _Ubat -> -> 10 `i `f 863  ]
-[; ;pwm_config.c: 83: {
-"83
-{
-[; ;pwm_config.c: 84: _delay((unsigned long)((10)*(64000000/4000.0)));
-"84
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;pwm_config.c: 85: CCPR1L=0;
+"81
+[e $U 860  ]
+[e :U 861 ]
 "85
-[e = _CCPR1L -> -> 0 `i `uc ]
-[; ;pwm_config.c: 86: CCPR2L=0;
-"86
-[e = _CCPR2L -> -> 0 `i `uc ]
-[; ;pwm_config.c: 87: while(1)
-"87
-[e :U 865 ]
-[; ;pwm_config.c: 88: {
-"88
-{
-"90
 }
-[e :U 864 ]
+[e :U 858 ]
+[; ;pwm_config.c: 84: }
+[; ;pwm_config.c: 85: }
+[; ;pwm_config.c: 86: if(Ubat<10)
+"86
+[e $ ! < _Ubat -> -> 10 `i `f 862  ]
+[; ;pwm_config.c: 87: {
 "87
-[e $U 865  ]
-[e :U 866 ]
+{
+[; ;pwm_config.c: 88: _delay((unsigned long)((10)*(64000000/4000.0)));
+"88
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;pwm_config.c: 89: CCPR1L=0;
+"89
+[e = _CCPR1L -> -> 0 `i `uc ]
+[; ;pwm_config.c: 90: CCPR2L=0;
+"90
+[e = _CCPR2L -> -> 0 `i `uc ]
+[; ;pwm_config.c: 91: while(1)
 "91
+[e :U 864 ]
+[; ;pwm_config.c: 92: {
+"92
+{
+"94
 }
 [e :U 863 ]
-[; ;pwm_config.c: 90: }
-[; ;pwm_config.c: 91: }
-[; ;pwm_config.c: 92: return Ubat;
-"92
+"91
+[e $U 864  ]
+[e :U 865 ]
+"95
+}
+[e :U 862 ]
+[; ;pwm_config.c: 94: }
+[; ;pwm_config.c: 95: }
+[; ;pwm_config.c: 96: return Ubat;
+"96
 [e ) _Ubat ]
-[e $UE 858  ]
-[; ;pwm_config.c: 93: }
-"93
-[e :UE 858 ]
+[e $UE 857  ]
+[; ;pwm_config.c: 97: }
+"97
+[e :UE 857 ]
+}
+"98
+[v _steering_angle `(v ~T0 @X0 1 ef1`uc ]
+"99
+{
+[; ;pwm_config.c: 98: void steering_angle(uint8_t received_angle)
+[; ;pwm_config.c: 99: {
+[e :U _steering_angle ]
+"98
+[v _received_angle `uc ~T0 @X0 1 r1 ]
+"99
+[f ]
+"100
+[v _my_angle_a `uc ~T0 @X0 1 a ]
+[; ;pwm_config.c: 100: uint8_t my_angle_a = 0;
+[e = _my_angle_a -> -> 0 `i `uc ]
+"101
+[v _my_angle_b `uc ~T0 @X0 1 a ]
+[; ;pwm_config.c: 101: uint8_t my_angle_b = 0;
+[e = _my_angle_b -> -> 0 `i `uc ]
+[; ;pwm_config.c: 102: my_angle_a = (received_angle * 55)/100;
+"102
+[e = _my_angle_a -> / * -> _received_angle `i -> 55 `i -> 100 `i `uc ]
+[; ;pwm_config.c: 103: my_angle_b = 100 - my_angle_a;
+"103
+[e = _my_angle_b -> - -> 100 `i -> _my_angle_a `i `uc ]
+[; ;pwm_config.c: 104: steering(my_angle_a, my_angle_b);
+"104
+[e ( _steering (2 , _my_angle_a _my_angle_b ]
+[; ;pwm_config.c: 105: }
+"105
+[e :UE 866 ]
 }

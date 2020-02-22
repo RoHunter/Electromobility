@@ -9762,8 +9762,6 @@ void adc_config(void);
 void eusart_config(void);
 
 # 34 "pwm_config.h"
-void right(int dty_car);
-void left (int dty_car);
 float read_Ibat(void);
 float read_Ubat(void);
 
@@ -9878,6 +9876,8 @@ void USART2GotoNewLine();
 void USART2WriteInt(int16_t val, int8_t field_length);
 
 # 30 "main.c"
+void steering_angle(uint8_t received_angle);
+
 char str_V[8],str_A[8];
 float rez_adc_A,tens_A,Ibat,rez_adc_U,Ubat,tens;
 unsigned int cor,TMR,distanta;
@@ -9885,131 +9885,16 @@ unsigned long timp_us = 0;
 
 void interrupt serial(void)
 {
-char str_V[8],str_A[8];
-float i,j;
 
-if (RC1IF==1)
+
+
+if(RC1IF==1)
 {
-int flag=0;
-
-flag=RCREG1;
-
-switch(flag)
-{
-case 0x66:
-CCPR2L=CCPR1L=60;
-LATDbits.LD1=LATDbits.LD2=1;
-LATDbits.LD0=0;
-break;
-
-case 0x53:
-CCPR2L=CCPR1L=0;
-LATDbits.LD0=1;
-break;
-
-case 0x4c:
-CCPR2L=80;
-CCPR1L= 30;
-LATDbits.LD0=0;
-break;
-
-case 0x52:
-CCPR1L=80;
-CCPR2L=20;
-LATDbits.LD0=0;
-break;
-
-case 0x42:
-CCPR2L=CCPR1L=60;
-LATDbits.LD1=LATDbits.LD2=0;
-LATDbits.LD0=0;
-break;
-
-case 0x49:
-CCPR1L=70;
-CCPR2L=70;
-LATDbits.LD0=0;
-LATDbits.LD1=1;
-LATDbits.LD2=0;
-break;
-
-
-
-case 0x7a:
-CCPR2L=CCPR1L=0;
-LATDbits.LD0=1;
-LATEbits.LE0=1;
-LATEbits.LE1=1;
-LATEbits.LE2=0;
-break;
-
-case 0x48:
-CCPR2L=CCPR1L=0;
-LATDbits.LD0=1;
-LATEbits.LE0=1;
-LATEbits.LE2=1;
-LATEbits.LE1=0;
-break;
-
-case 0x61:
-i=read_Ibat();
-sprintf(str_A, "%.2f", i);
-USARTWriteString(str_A);
-break;
-
-case 0x76:
-j=read_Ubat();
-sprintf(str_V, "%.1f", j);
-USARTWriteString(str_V);
-break;
-
-case 0x6F:
-LATEbits.LE0=1;
-break;
-
-case 0x82:
-CCPR2L=CCPR1L=0;
-LATDbits.LD0=1;
-_delay((unsigned long)((2000)*(64000000/4000.0)));
-CCPR2L=CCPR1L=30;
-break;
-
-case 0x81:
-CCPR2L=CCPR1L=0;
-LATDbits.LD0=1;
-_delay((unsigned long)((1000)*(64000000/4000.0)));
-CCPR2L=CCPR1L=30;
-LATDbits.LD0=0;
-break;
-
-case 0x80:
-CCPR2L=CCPR1L=0;
-LATDbits.LD0=1;
-_delay((unsigned long)((2000)*(64000000/4000.0)));
-while(1)
-{
-_delay((unsigned long)((2000)*(64000000/4000.0)));
-}
-break;
-
-case 0x44:
-CCPR2L=CCPR1L=0;
-LATDbits.LD0=1;
-_delay((unsigned long)((3000)*(64000000/4000.0)));
-CCPR2L=CCPR1L=30;
-break;
-
-case 0x47:
-LATDbits.LD1=1;
-LATDbits.LD2=0;
-CCPR2L=CCPR1L=140;
-break;
-
-
-}
-}
 RC1IF=0;
-
+uint8_t angle_from_pi=0;
+angle_from_pi=RCREG1;
+steering_angle(angle_from_pi);
+}
 }
 
 void main(void)

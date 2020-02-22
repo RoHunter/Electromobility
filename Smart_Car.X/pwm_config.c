@@ -9,33 +9,37 @@
 #include <xc.h>
 #include "bit_config.h"
 #include "config.h"
-int c,dty_car;
+#include "stdint.h"
+#include "pwm_config.h"
+
+#define servo_to_diff 55
+
+void steering(uint8_t dty_left, uint8_t dty_right);
+
+
 float  rez_adc_A,tens_A,Ibat,rez_adc_U,Ubat,tens;
 
-void left(int dty_car)
+void steering(uint8_t dty_left, uint8_t dty_right)
 {
-	if(dty_car>100)
+    uint8_t buffer;
+	if(dty_left>100)
     {
-    dty_car=100;
+        dty_left=100;
     }
-    
-	c=dty_car*1.7; 
-	CCPR2L=c;
+       
+    if(dty_right > 100)
+    {
+        dty_right=100;
+    }
+       
+
+	buffer=dty_left*1.7; 
+	CCPR1L=buffer/2;  
+    buffer = dty_right*1.7;
+	CCPR2L=buffer/2;  
     
     // valoarea din pwm si face o fct pt 100 putere maxima
     //left
-	
-}
-void right(int dty_car)
-{
-	if(dty_car>100)
-    {
-    dty_car=100;
-    }
-    
-	c=dty_car*1.7; 
-	CCPR1L=c;  
-	//right
 }
 
   float read_Ibat(void)//citire curent de iesire
@@ -91,3 +95,11 @@ void right(int dty_car)
     }
     return Ubat;
 }
+    void steering_angle(uint8_t received_angle)
+    {
+        uint8_t my_angle_a = 0;
+        uint8_t my_angle_b = 0;
+        my_angle_a = (received_angle * servo_to_diff)/100;
+        my_angle_b = 100 - my_angle_a;
+        steering(my_angle_a, my_angle_b);
+    }
